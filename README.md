@@ -1,0 +1,43 @@
+# Config.py
+telegram_bot_token = "8376448352:AAHUweH-FOtF4QTENry8gDseBcFpdcLCQgw"
+telegram_chat_id = "7753897451"
+
+# Recherches Vinted UK
+queries = [
+    {"search_text": "nike running"},
+    {"search_text": "nike running division"},
+    {"search_text": "nike future fast"},
+    {"search_text": "nike running future fast"},
+    {"search_text": "nike division"},
+]
+# app.py
+import os
+import subprocess
+import time
+import threading
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+# Mini serveur HTTP pour Render
+class OKHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+def run_http_server():
+    port = int(os.environ.get("PORT", "10000"))  # Render fournit la variable PORT
+    httpd = HTTPServer(("0.0.0.0", port), OKHandler)
+    httpd.serve_forever()
+
+def run_scanner_loop():
+    while True:
+        subprocess.run(["python", "vinted_scanner.py"], check=False)
+        time.sleep(15)  # Vérification toutes les 15 secondes
+
+if __name__ == "__main__":
+    threading.Thread(target=run_http_server, daemon=True).start()
+    run_scanner_loop()
+    requests
+beautifulsoup4
+python-telegram-bot==20.3
+lxml
