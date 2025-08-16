@@ -37,6 +37,7 @@ def run_scanner_loop():
 if __name__ == "__main__":
     threading.Thread(target=run_http_server, daemon=True).start()
     run_scanner_loop()
+#requirement.txt
     requests
 beautifulsoup4
 python-telegram-bot==20.3
